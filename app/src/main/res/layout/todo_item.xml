@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <CheckBox
+        android:id="@+id/statusCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true">
+        <!--android:layout_marginTop="52dp"-->
+        <!--android:layout_toRightOf="@+id/StatusLabel" > -->
+
+    </CheckBox>
+
+    <TextView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/statusCheckBox"
+        android:textAppearance="?android:attr/textAppearanceLarge" >
+    </TextView>
+<!--
+    <TextView
+        android:id="@+id/StatusLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/statusCheckBox"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/done_string" >
+    </TextView>
+-->
+
+
+    <TextView
+        android:id="@+id/PriorityLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="52dp"
+        android:text="@string/priority_string">
+    </TextView>
+
+
+    <Spinner
+        android:id="@+id/prioritySpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/PriorityLabel"
+        android:layout_toRightOf="@+id/PriorityLabel"
+        android:layout_toEndOf="@+id/PriorityLabel"
+        android:spinnerMode="dialog"/>
+
+<!--
+    <TextView
+        android:id="@+id/priorityView"
+        android:layout_width="50dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignBaseline="@+id/PriorityLabel"
+        android:layout_toRightOf="@+id/PriorityLabel"
+        android:editable="true"
+        android:autoText="false"
+        android:inputType="textFilter"
+        android:singleLine="true"
+        android:visibility="invisible">
+    </TextView>
+-->
+    <TextView
+        android:id="@+id/DateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignBaseline="@+id/PriorityLabel"
+        android:layout_toLeftOf="@+id/dateView"
+        android:text="@string/date_string" >
+    </TextView>
+
+    <TextView
+        android:id="@+id/dateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/PriorityLabel">
+
+    </TextView>
+
+</RelativeLayout>
