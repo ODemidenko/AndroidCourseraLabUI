@@ -126,7 +126,9 @@ public class AddToDoActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 
+
 				// gather ToDoItem data
+
 
 				// TODO - Get the current Priority
 				Priority priority=null;
@@ -156,9 +158,10 @@ public class AddToDoActivity extends Activity {
 				String titleString = mTitleText.getText().toString();
 
 				// Construct the Date string
-				SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+				//SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 						//new SimpleDateFormat(DateFormat.getBestDateTimePattern(Locale.US,"yyyy-MM-dd"));
-				String fullDate =  dateFormat.format(mDate)
+				String fullDate =  //dateFormat.format(mDate)
+						dateString
 						//getDateFormat(AddToDoActivity.this).format(mDate)
 						+ " "
 						+ timeView.getText().toString();
