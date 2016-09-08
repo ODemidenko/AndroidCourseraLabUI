@@ -156,10 +156,10 @@ public class AddToDoActivity extends Activity {
 				String titleString = mTitleText.getText().toString();
 
 				// Construct the Date string
-				SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-						//new SimpleDateFormat(DateFormat.getBestDateTimePattern(Locale.US,"yyyy-MM-dd"));
-				String fullDate =  dateFormat.format(mDate)
-						//getDateFormat(AddToDoActivity.this).format(mDate)
+				//SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+				//new SimpleDateFormat(DateFormat.getBestDateTimePattern(Locale.US,"yyyy-MM-dd"));
+				String fullDate =  //dateFormat.format(mDate)
+						dateString
 						+ " "
 						+ timeView.getText().toString();
 
