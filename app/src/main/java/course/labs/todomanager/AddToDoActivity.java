@@ -169,7 +169,7 @@ public class AddToDoActivity extends Activity {
 						fullDate);
 
 				// TODO - return data Intent and finish
-				setResult(ToDoManagerActivity.ADD_TODO_ITEM_SUCCESS,data);
+				setResult(ToDosByOrderFragment.ADD_TODO_ITEM_SUCCESS,data);
 				finish();
 			}
 		    });

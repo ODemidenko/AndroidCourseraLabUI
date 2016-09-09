@@ -1,51 +1,38 @@
 package course.labs.todomanager;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.ListActivity;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.util.Date;
-
-import course.labs.todomanager.ToDoItem.Priority;
-import course.labs.todomanager.ToDoItem.Status;
-
-public class ToDosByDeadlineFragment extends ListFragment{
-
-	private static final int ADD_TODO_ITEM_REQUEST = 0;
+/**
+ * Created by Oleg on 09.09.2016.
+ */
+public class ToDosByOrderFragment extends ListFragment {
 	public static final int ADD_TODO_ITEM_SUCCESS = 1;
+	private static final int ADD_TODO_ITEM_REQUEST = 0;
 	private static final String FILE_NAME = "TodoManagerActivityData.txt";
 	private static final String TAG = "Lab-UserInterface";
-
 	// IDs for menu items
 	private static final int MENU_DELETE = Menu.FIRST;
 	private static final int MENU_DUMP = Menu.FIRST + 1;
-
 	ToDoListAdapter mAdapter;
+	ToDoListAdapter.SortOrder mSortOrder;
+
+	public void setSortOrder(ToDoListAdapter.SortOrder sortOrder) {
+		this.mSortOrder=sortOrder;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		setRetainInstance(true);
 	}
 
 	@Override
@@ -68,7 +55,7 @@ public class ToDosByDeadlineFragment extends ListFragment{
 		getListView().addFooterView(footerView);
 
 		// TODO - Attach Listener to FooterView
-		footerView.setOnClickListener(new OnClickListener() {
+		footerView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
@@ -80,10 +67,11 @@ public class ToDosByDeadlineFragment extends ListFragment{
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
+		Log.d(TAG,"hash:"+ this.hashCode());
 		super.onActivityCreated(savedInstanceState);
 
 		mAdapter=((ToDoManagerActivity) getActivity()).mAdapter;
-		mAdapter.setCurrentSortOrder(ToDoListAdapter.SortOrder.ByDeadline);
+		mAdapter.setCurrentSortOrder(mSortOrder);
 
 		// TODO - Attach the adapter to this ListActivity's ListView
 		setListAdapter(mAdapter);

@@ -31,8 +31,6 @@ import course.labs.todomanager.ToDoItem.Status;
 
 public class ToDoManagerActivity extends Activity{
 
-	private static final int ADD_TODO_ITEM_REQUEST = 0;
-	public static final int ADD_TODO_ITEM_SUCCESS = 1;
 	private static final String FILE_NAME = "TodoManagerActivityData.txt";
 	private static final String TAG = "Lab-UserInterface";
 
@@ -53,26 +51,16 @@ public class ToDoManagerActivity extends Activity{
 
 		ActionBar actionBar=getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		ToDosByDeadlineFragment byDeadlineFragment=new ToDosByDeadlineFragment();
+		ToDosByOrderFragment byDeadlineFragment=new ToDosByOrderFragment();
+		byDeadlineFragment.setSortOrder(ToDoListAdapter.SortOrder.ByDeadline);
 		actionBar.addTab(actionBar.newTab().setText(R.string.deadlineSort).setTabListener(new TabListener(byDeadlineFragment)));
 
+		ToDosByOrderFragment byPriorityDeadlineFragment=new ToDosByOrderFragment();
+		byPriorityDeadlineFragment.setSortOrder(ToDoListAdapter.SortOrder.ByPriorityDeadline);
+		actionBar.addTab(actionBar.newTab().setText(R.string.priorityDeadlineSort).setTabListener(new TabListener(byPriorityDeadlineFragment)));
+
 	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-		Log.i(TAG,"Entered onActivityResult()");
-
-		// TODO - Check result code and request code
-		// if user submitted a new ToDoItem
-		// Create a new ToDoItem from the data Intent
-		// and then add it to the adapter
-		if (requestCode==ADD_TODO_ITEM_REQUEST
-			&&resultCode==ADD_TODO_ITEM_SUCCESS) {
-				ToDoItem item=new ToDoItem(data);
-				mAdapter.add(item);
-		}
-	}
 
 	// Do not modify below here
 

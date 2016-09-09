@@ -99,11 +99,10 @@ public class ToDoListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		// TODO - Get the current ToDoItem
 		final ToDoItem toDoItem = mItems.get(position);
 
 
-		// TODO - Inflate the View for this ToDoItem
+		//  Inflate the View for this ToDoItem
 		// from todo_item.xml
         RelativeLayout itemLayout = null;
         if (convertView==null) {
@@ -152,11 +151,11 @@ public class ToDoListAdapter extends BaseAdapter {
 		final TextView titleView = (TextView) itemLayout.findViewById(R.id.titleView);
         titleView.setText(toDoItem.getTitle());
 
-		// TODO - Set up Status CheckBox
+
 		final CheckBox statusView = (CheckBox) itemLayout.findViewById(R.id.statusCheckBox);
         statusView.setChecked(toDoItem.getStatus()==ToDoItem.Status.DONE);
 
-		// TODO - Must also set up an OnCheckedChangeListener,
+
 		// which is called when the user toggles the status checkbox
 
 		statusView.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -168,18 +167,15 @@ public class ToDoListAdapter extends BaseAdapter {
 					}
 				});
 
-		// TODO - Display Priority in a TextView
+
 //		final TextView priorityView = (TextView) itemLayout.findViewById(R.id.priorityView);
 //        priorityView.setText(toDoItem.getPriority().toString().toUpperCase());
 
         final Spinner spinnerSelector = (Spinner) itemLayout.findViewById(R.id.prioritySpinner);
         ArrayAdapter<ToDoItem.Priority> adapter = new ArrayAdapter<ToDoItem.Priority>(mContext, android.R.layout.select_dialog_singlechoice, ToDoItem.Priority.values());
-        //That is to see the dropdown list view
+		//That is to see the dropdown list view
         //adapter.setDropDownViewResource(R.layout.spinner_dropdown);
         spinnerSelector.setAdapter(adapter);
-
-
-
         spinnerSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -191,8 +187,10 @@ public class ToDoListAdapter extends BaseAdapter {
 
             }
         });
+		spinnerSelector.setSelection(adapter.getPosition(toDoItem.getPriority()));
 
-        // TODO - Display Time and Date.
+
+		//  Display Time and Date.
 		// Hint - use ToDoItem.FORMAT.format(toDoItem.getDate()) to get date and
 		// time String
 		final TextView dateView = (TextView) itemLayout.findViewById(R.id.dateView);
