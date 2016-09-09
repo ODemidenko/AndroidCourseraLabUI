@@ -28,6 +28,11 @@ proguard/
 # Eclipse prefs files
 .prefs
 
+# idea files
+.idea/
+app/app.iml
+
+
  # Mac files
 .DS_Store
 

@@ -23,5 +23,7 @@
     <string name="delete_confirmation">Are you sure want to delete it?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="deadlineSort">By deadline</string>
+    <string name="priorityDeadlineSort">By priority and deadline</string>
 
 </resources>

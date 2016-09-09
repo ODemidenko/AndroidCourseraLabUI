@@ -1,6 +1,7 @@
 package course.labs.todomanager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -20,6 +21,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.view.LayoutInflater;
 
@@ -27,6 +29,9 @@ public class ToDoListAdapter extends BaseAdapter {
 
 	private final List<ToDoItem> mItems = new ArrayList<ToDoItem>();
 	private final Context mContext;
+
+	public enum SortOrder{ByDeadline, ByPriorityDeadline}
+	private SortOrder currentSortOrder;
 
 	private static final String TAG = "Lab-UserInterface";
 
@@ -42,9 +47,11 @@ public class ToDoListAdapter extends BaseAdapter {
 	public void add(ToDoItem item) {
 
 		mItems.add(item);
+		sortData();
 		notifyDataSetChanged();
 
 	}
+
 
 	// Clears the list adapter of all items.
 
@@ -195,4 +202,21 @@ public class ToDoListAdapter extends BaseAdapter {
 		return itemLayout;
 
 	}
+
+	private void sortData() {
+		switch (currentSortOrder) {
+			case ByDeadline:
+				Collections.sort(mItems, new ToDoItem.DeadlineComparator());
+				break;
+			case ByPriorityDeadline:
+				Collections.sort(mItems, new ToDoItem.PriorityDeadlineComparator());
+				break;
+		}
+	}
+
+	public void setCurrentSortOrder(SortOrder order) {
+		currentSortOrder=order;
+		sortData();
+	}
+
 }

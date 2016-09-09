@@ -12,6 +12,10 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Date;
 
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +29,7 @@ import android.widget.TextView;
 import course.labs.todomanager.ToDoItem.Priority;
 import course.labs.todomanager.ToDoItem.Status;
 
-public class ToDoManagerActivity extends ListActivity {
+public class ToDoManagerActivity extends Activity{
 
 	private static final int ADD_TODO_ITEM_REQUEST = 0;
 	public static final int ADD_TODO_ITEM_SUCCESS = 1;
@@ -42,37 +46,16 @@ public class ToDoManagerActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		setContentView(R.layout.basic_layout);
+
 		// Create a new TodoListAdapter for this ListActivity's ListView
 		mAdapter = new ToDoListAdapter(getWindow().getContext());
 
-		// Put divider between ToDoItems and FooterView
-		getListView().setFooterDividersEnabled(true);
+		ActionBar actionBar=getActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		ToDosByDeadlineFragment byDeadlineFragment=new ToDosByDeadlineFragment();
+		actionBar.addTab(actionBar.newTab().setText(R.string.deadlineSort).setTabListener(new TabListener(byDeadlineFragment)));
 
-		// TODO - Inflate footerView for footer_view.xml file
-		TextView footerView = null;
-		footerView = (TextView) LayoutInflater.from(this).inflate(R.layout.footer_view,getListView(),false);
-
-
-		// NOTE: You can remove this block once you've implemented the assignment
-		if (null == footerView) {
-			return;
-		}
-		// TODO - Add footerView to ListView
-		getListView().addFooterView(footerView);
-
-		// TODO - Attach Listener to FooterView
-		footerView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-
-			Intent addItemIntent=new Intent(ToDoManagerActivity.this,AddToDoActivity.class);
-			startActivityForResult(addItemIntent,ADD_TODO_ITEM_REQUEST);
-			}
-		});
-
-		// TODO - Attach the adapter to this ListActivity's ListView
-		getListView().setAdapter(mAdapter);
-		
 	}
 
 	@Override
@@ -133,6 +116,32 @@ public class ToDoManagerActivity extends ListActivity {
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	private class TabListener implements ActionBar.TabListener {
+
+		private Fragment mFragment;
+
+		public TabListener(Fragment frag) {
+			this.mFragment=frag;
+		}
+
+		@Override
+		public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+			if (null != fragmentTransaction) {
+				fragmentTransaction.replace(R.id.fragment_container, mFragment);
+			}
+		}
+
+		@Override
+		public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+		}
+
+		@Override
+		public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
 		}
 	}
 

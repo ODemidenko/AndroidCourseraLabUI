@@ -2,6 +2,7 @@ package course.labs.todomanager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 
@@ -32,6 +33,30 @@ public class ToDoItem {
 	private Priority mPriority = Priority.LOW;
 	private Status mStatus = Status.NOTDONE;
 	private Date mDate = new Date();
+
+	public static class DeadlineComparator implements Comparator<ToDoItem> {
+
+		@Override
+		public int compare(ToDoItem toDoItem, ToDoItem t1) {
+			return toDoItem.getDate().compareTo(t1.getDate());
+		}
+	}
+
+	public static class PriorityDeadlineComparator implements Comparator<ToDoItem> {
+
+		@Override
+		public int compare(ToDoItem toDoItem, ToDoItem t1) {
+
+			if (toDoItem.getPriority()==t1.getPriority()) return toDoItem.getDate().compareTo(t1.getDate());
+			if (toDoItem.getPriority()==Priority.HIGH) return 1;
+			if (toDoItem.getPriority()==Priority.MED) {
+				if (t1.getPriority()==Priority.LOW)	return 1;
+				else return -1;
+			}
+			if (toDoItem.getPriority()==Priority.LOW) return -1;
+			return 0;
+		}
+	}
 
 	ToDoItem(String title, Priority priority, Status status, Date date) {
 		this.mTitle = title;
